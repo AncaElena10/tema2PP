@@ -1,0 +1,54 @@
+Moisa Anca-Elena
+321 CA
+Tema 2 PP
+
+functia neighborsOf
+-primeste ca parametru o stare din care porneste algoritmul
+-pentru implementare am folosit o functie anonima
+-mai intai obtin perechea in care se gaseste starea curenta, dupa care extrag al 
+doilea element din fiecare pereche si formez o lista noua, care reprezinta vecinii 
+starii curente.
+
+functia randomPath
+-primeste ca parametru un generator
+-am utilizat o functie anonima
+-ideea e urmatoarea: iterez prin lista si generez numere random, apoi pe fiecare aplic 
+modulo lungimea listei de vecini ai starii curente, pentru a obtine niste indici care 
+reprezinta chiar vecinii unei stari; tot in functia lambda, generez la fiecare pas un 
+nou generator ('generator' va fi format din doua generatoare, si nu conteaza daca il 
+aleg pe primul sau pe al doilea, amandoua sunt random).
+
+funtia terminatePath
+-primeste ca parametru o cale (o lista infinita)
+-initial verific daca lista este goala; daca da, se returneaza o lista vida; altfel, 
+daca primul element extras din coada nu se afla in lista terminalelor (8 sau 12 - pentru 
+asta am folosit elem care verifica daca un element se afla intr-o lista), atunci voi 
+reapela recursiv functia pe toate elementele caii, mai putin primul element; altfel, 
+voi concatena acest prim element intr-o lista.
+
+functia randomPaths
+-primeste ca parametru un generator
+-functia mea doar genereaza la infinit aceeasi cale primita
+-calea aceasta este primul element din lista returnata de functia randomPath.
+
+functia reinforcements
+-am creat un array de tipul (pozitie, valoare); pe pozitiile 8 si 12, valoarea este 
+-1, respectiv 1.
+
+functia initialEstimation
+-genereaza acelasi array ca la functia reinforcements.
+
+functia values
+-extrag cu elems fiecare dintre valorile array-ului.
+
+functia updateEstimation
+-primeste 2 parametri: un array de estimari si o cale
+-pentru implementare am folosit List Comprehensions si functia accum
+-accum aduna elementele aflate pe acelasi index
+-de asemenea, am urmat formula din enuntul temei: V(s) <- V(s) + alpha[R(s) + V(s') - V(s)]
+-in primul rand, verific daca primul element din path se afla in terminalStates. Daca da, atunci rezultatul va fi 0; daca nu, aplic formula si potrivesc indicii (cea mai challenging parte)
+	>R(s) = rr !! (r - 1) (rr este multimea de valori a starilor)
+	>V(s') = (ee !! (path !! (head (elemIndices r path) + 1) - 1)) (ee reprezinta multimea de valori ale starilor initiale)
+	>V(s) = ee !! (r - 1)
+
+Referinta: un mic ajutor din partea colegei mele, Andreea Dobroteanu la functia randomPath
